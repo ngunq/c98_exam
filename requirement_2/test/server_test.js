@@ -19,11 +19,21 @@ function case_1() {
 
 function case_2() {
     const name = "Test unallow port"
-    http.get(`${blocked_address}`, (res) => {
+    const request = http.get(`${blocked_address}`, { timeout: 3000 }, (res) => {
         console.log(`${name}: FAILED`)
     }).on("error", (err) => {
         console.log(`${name}: PASSED`)
     });
+    // use its "timeout" event to abort the request
+    request.on('timeout', () => {
+        request.destroy();
+    });
+
+    // http.get(`${blocked_address}`, { timeout: 3000 }, (res) => {
+    //     console.log(`${name}: FAILED`)
+    // }).on("error", (err) => {
+    //     console.log(`${name}: PASSED`)
+    // });
 }
 
 case_1()
