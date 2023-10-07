@@ -29,6 +29,8 @@ Now, REST API server started on URL: http://127.0.0.1:3000 or http://localhost:3
 
 ### Requirement 2
 - Using Terraform to provision infrastructure on AWS
+    - Launching a AWS VPC
+    - Config AWS Security Group only allow port 22 (for SSH) and 3000 (port API access)
 - Using Ansible to configure AWS EC2 instance and deploy REST API
 - Using Github Action for CI/CD
   
@@ -75,6 +77,16 @@ At the console screen, we can find the public IP of the EC2 server that has prov
 - Using Ansible to deploy REST API
 ```sh
 ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook --inventory <server-ip>, --private-key .ssh/ssh_private_key --user ec2-user deploy-playbook.yml
+```
+- Run Unit Test
+```sh
+cd test
+node server_test.js <server-ip>
+```
+The output should be like 
+```sh
+Test API Port: PASSED
+Test unallow port: PASSED
 ```
 Now, we can access the REST API through URL: `http://<server-ip>:3000`
 
