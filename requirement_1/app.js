@@ -84,6 +84,11 @@ const moveFileFromTemporary = (filename) => {
     fs.unlinkSync(source)
 }
 
+// Health check
+app.get('/health', (req, res) => {
+    res.send('OK')
+});
+
 // Upload a new file
 app.post('/upload', upload.single('file'), (req, res) => {
     const { file } = req;
