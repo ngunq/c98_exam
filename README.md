@@ -80,8 +80,7 @@ ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook --inventory <server-ip>, --priv
 ```
 - Run Unit Test
 ```sh
-cd test
-node server_test.js <server-ip>
+node test/server_test.js <server-ip>
 ```
 The output should be like 
 ```sh
